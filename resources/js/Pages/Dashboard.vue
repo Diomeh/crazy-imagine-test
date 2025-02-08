@@ -1,10 +1,23 @@
 <script setup>
 import { defineProps } from 'vue';
+import axios from "axios";
 
 const props = defineProps({
     role: String,
     name: String,
 });
+
+const handleLogout = async () => {
+    // Submit a post XHR to logout user
+    // As server handles everything regarding logout
+    // we don't really care about the response
+    try {
+        await axios.post("/logout");
+        window.location = '/';
+    } catch (e) {
+        console.log(e);
+    }
+}
 </script>
 
 <template>
@@ -31,7 +44,7 @@ const props = defineProps({
             <div class="my-4 border-t border-gray-600"></div>
 
             <div class="mt-6">
-                <a href="#" class="text-white hover:text-gray-400">Log out</a>
+                <a href="#" @click.prevent="handleLogout" class="text-white hover:text-gray-400">Log out</a>
             </div>
         </div>
 

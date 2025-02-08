@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupRequest;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +56,7 @@ class UserController extends Controller
         ])->onlyInput('email');
     }
 
-    public function visitDashboard(Request $request): Response
+    public function visitDashboard(): Response
     {
         // As user data won't change,
         // there's really no need to worry about hydration or API calls in dashboard
@@ -64,5 +65,15 @@ class UserController extends Controller
             'name' => $user->name,
             'role' => $user->role,
         ]);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response()->json();
     }
 }

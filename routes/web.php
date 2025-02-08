@@ -4,6 +4,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::redirect('/', '/signin');
+
 // Signup routes
 Route::get('/signup', function() {
     return Inertia::render('Signup');
@@ -17,3 +19,5 @@ Route::get('/signin', function() {
 Route::post('/signin', [UserController::class, 'authUser']);
 
 Route::get('/dashboard', [UserController::class, 'visitDashboard']);
+
+Route::post('/logout', [UserController::class, 'logout']);
