@@ -23,13 +23,13 @@ class UserController extends Controller
 
         $data = $request->validated();
         $user = new User();
-        $user->name = $data->name;
-        $user->email = $data->email;
-        $user->age = $data->age;
-        $user->dob = $data->dob;
-        $user->address = $data->address;
-        $user->password = Hash::make($data->password);
-        $user->role = $data->role;
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->age = $data['age'];
+        $user->dob = $data['dob'];
+        $user->address = $data['address'];
+        $user->password = Hash::make($data['password']);
+        $user->role = $data['role'];
         $user->profile_picture = $pfpPath;
         $user->save();
 

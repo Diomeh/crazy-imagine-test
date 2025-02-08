@@ -6,15 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    public string $name;
-    public string $email;
-    public int $age;
-    public string $dob;
-    public string $address;
-    public string $password;
-    public string $role;
-    public string $profile_picture;
-
     /**
      * The attributes that are mass assignable.
      *
