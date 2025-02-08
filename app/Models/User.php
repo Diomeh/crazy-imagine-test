@@ -18,6 +18,7 @@ class User extends Authenticatable
         'dob',
         'address',
         'password',
+        'role',
         'profile_picture',
     ];
 

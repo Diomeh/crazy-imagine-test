@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class UserController extends Controller
 {
@@ -51,5 +53,16 @@ class UserController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+    public function visitDashboard(Request $request): Response
+    {
+        // As user data won't change,
+        // there's really no need to worry about hydration or API calls in dashboard
+        $user = Auth::user();
+        return Inertia::render('Dashboard', [
+            'name' => $user->name,
+            'role' => $user->role,
+        ]);
     }
 }

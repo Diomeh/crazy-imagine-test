@@ -15,3 +15,5 @@ Route::get('/signin', function() {
     return Inertia::render('Signin');
 });
 Route::post('/signin', [UserController::class, 'authUser']);
+
+Route::get('/dashboard', [UserController::class, 'visitDashboard']);
