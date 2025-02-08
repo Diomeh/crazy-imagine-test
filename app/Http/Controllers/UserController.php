@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function showSignupForm(): View|Factory|Application
-    {
-        return view('signup');
-    }
-
     public function registerUser(SignupRequest $request): RedirectResponse
     {
         // Do we have pfp?
@@ -38,6 +33,6 @@ class UserController extends Controller
         $user->profile_picture = $pfpPath;
         $user->save();
 
-        return redirect()->route('signup.form')->with('success', 'User registered successfully!');
+        return redirect()->route('signup')->with('success', 'User registered successfully!');
     }
 }

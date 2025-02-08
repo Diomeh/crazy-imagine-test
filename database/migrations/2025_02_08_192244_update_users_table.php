@@ -13,7 +13,6 @@ return new class extends Migration
     {
         // We will not be using laravel auth system so we drop unused tables
         Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
 
         Schema::table('users', function (Blueprint $table) {
             // We also drop unused fields
