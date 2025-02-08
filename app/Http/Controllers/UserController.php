@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupRequest;
 use App\Models\User;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class UserController extends Controller
 {
@@ -33,6 +35,45 @@ class UserController extends Controller
         $user->profile_picture = $pfpPath;
         $user->save();
 
-        return redirect()->route('signup')->with('success', 'User registered successfully!');
+        return redirect()->intended('signin');
+    }
+
+    public function authUser(Request $request): RedirectResponse
+    {
+        $creds = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        if (Auth::attempt($creds)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
+    public function visitDashboard(): Response
+    {
+        // As user data won't change,
+        // there's really no need to worry about hydration or API calls in dashboard
+        $user = Auth::user();
+        return Inertia::render('Dashboard', [
+            'name' => $user->name,
+            'role' => $user->role,
+        ]);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response()->json();
     }
 }

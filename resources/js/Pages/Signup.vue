@@ -20,12 +20,6 @@ const handleFileUpload = (event) => {
 const submitForm = () => {
     form.post("/signup", {
         forceFormData: true, // Ensures form data is sent correctly
-        onSuccess: () => {
-            alert("User registered successfully!");
-        },
-        onError: (errors) => {
-            console.log(errors);
-        },
     });
 };
 </script>
