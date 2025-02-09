@@ -1,14 +1,14 @@
 <script setup>
 import { defineProps } from 'vue';
-import { Link, useForm } from '@inertiajs/vue3'
+import { Link, useForm } from '@inertiajs/vue3';
 
 const deleteForm = useForm({
     id: 0,
-})
+});
 
-defineProps({
-    students: Array,
-})
+const { paginator } = defineProps({
+    paginator: Object,
+});
 
 // This is an ugly hack
 const deleteStudent = (id) => {
@@ -21,7 +21,7 @@ const deleteStudent = (id) => {
 
 <template>
     <div class="container mx-auto p-4 max-w-4xl">
-        <!--  Delete form -->
+        <!-- Delete form -->
         <form>
             <input v-model="deleteForm.id" type="hidden" name="id">
         </form>
@@ -49,7 +49,7 @@ const deleteStudent = (id) => {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="student in students" :key="student.id">
+            <tr v-for="student in paginator.data" :key="student.id">
                 <td class="border-b px-4 py-2">{{ student.id }}</td>
                 <td class="border-b px-4 py-2">{{ student.first_name }}</td>
                 <td class="border-b px-4 py-2">{{ student.last_name }}</td>
@@ -77,5 +77,41 @@ const deleteStudent = (id) => {
             </tr>
             </tbody>
         </table>
+
+        <!-- Pagination controls -->
+        <div class="flex justify-center mt-4">
+            <span>
+                <Link
+                    v-if="paginator.prev_page_url"
+                    :href="paginator.prev_page_url"
+                    class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 transition-colors mr-2"
+                >
+                    &laquo; Previous
+                </Link>
+            </span>
+
+            <span v-for="(page, index) in paginator.links" :key="index">
+                <Link
+                    v-if="page.url && index > 0 && index < (paginator.links.length - 1)"
+                    :href="page.url"
+                    :class="[
+                        'py-2 px-4 rounded transition-colors mr-2',
+                        page.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black hover:bg-blue-500 hover:text-white'
+                    ]"
+                >
+                    {{ page.label }}
+                </Link>
+            </span>
+
+            <span>
+                <Link
+                    v-if="paginator.next_page_url"
+                    :href="paginator.next_page_url"
+                    class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 transition-colors ml-2"
+                >
+                    Next &raquo;
+                </Link>
+            </span>
+        </div>
     </div>
 </template>

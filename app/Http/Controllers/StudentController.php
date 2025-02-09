@@ -16,9 +16,9 @@ class StudentController extends Controller
      */
     public function index(): Response
     {
-        $students = Student::all();
+        $paginator = Student::paginate(10);
         return Inertia::render('Students/Index', [
-            'students' => $students
+            'paginator' => $paginator,
         ]);
     }
 
