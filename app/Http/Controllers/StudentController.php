@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -74,7 +73,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
+    public function update(StoreStudentRequest $request, Student $student): RedirectResponse
     {
         // Validate and update the student
         $validated = $request->validated();

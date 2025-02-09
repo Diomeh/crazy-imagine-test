@@ -5,6 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+
+/**
+ * A custom request class that handles access and data validation
+ * when both creating and updating a student entity.
+ *
+ * In a more complex scenario, create and update would live in
+ * their own separate classes, but logic is simple enough to not warrant it
+ */
 class StoreStudentRequest extends FormRequest
 {
     /**
