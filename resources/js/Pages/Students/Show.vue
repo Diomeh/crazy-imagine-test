@@ -43,8 +43,8 @@ const deleteStudent = () => {
             </div>
         </div>
 
-        <SimpleInput :value="firstName" label="First Name" />
-        <SimpleInput :value="lastName" label="Last Name" />
-        <SimpleTextArea :value="address" label="Address" />
+        <SimpleInput :value="firstName" label="First Name" disabled />
+        <SimpleInput :value="lastName" label="Last Name" disabled />
+        <SimpleTextArea :value="address" label="Address" disabled />
     </div>
 </template>

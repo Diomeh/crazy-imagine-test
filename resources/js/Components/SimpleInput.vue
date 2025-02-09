@@ -1,15 +1,21 @@
 <script setup>
-
 import { useForm } from "@inertiajs/vue3";
 
-defineProps({
+const { formBinding, formKey } = defineProps({
     type: String,
     label: String,
     placeholder: String,
     value: String,
+    disabled: Boolean,
     formKey: String,
     formBinding: useForm,
 });
+
+const getFormErr = () => {
+    return formBinding && formBinding.errors && formBinding.errors[formKey]
+        ? formBinding.errors[formKey]
+        : null
+};
 </script>
 
 <template>
@@ -21,6 +27,7 @@ defineProps({
             v-model="formBinding[formKey]"
             :type="type ? type : 'text'"
             :placeholder="placeholder"
+            :disabled="disabled"
             class="w-full p-2 border rounded"
         />
         <input
@@ -28,10 +35,11 @@ defineProps({
             :type="type ? type : 'text'"
             :placeholder="placeholder"
             :value="value"
+            :disabled="disabled"
             class="w-full p-2 border rounded"
         />
 
-        <small v-if="formBinding.errors[formKey]" class="text-red-500">{{ formBinding.errors[formKey] }}</small>
+        <small v-if="getFormErr()" class="text-red-500">{{ getFormErr() }}</small>
     </div>
 </template>
 
