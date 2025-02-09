@@ -21,7 +21,7 @@ class FetchData extends Command
      * Taken from an actual successful response to endpoint
      * 'id' field has been removed
      */
-    const string DUMMY_RESPONSE = '{
+    const DUMMY_RESPONSE = '{
         "status": "success",
         "data": [
             {
