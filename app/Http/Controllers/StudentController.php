@@ -48,9 +48,11 @@ class StudentController extends Controller
      */
     public function show(Student $student): Response
     {
-        // Return Inertia view to show the student details
         return Inertia::render('Students/Show', [
-            'student' => $student
+            'id' => $student->id,
+            'firstName' => $student->first_name,
+            'lastName' => $student->last_name,
+            'address' => $student->address,
         ]);
     }
 
@@ -59,9 +61,13 @@ class StudentController extends Controller
      */
     public function edit(Student $student): Response
     {
-        // Return Inertia view for editing the student
-        return Inertia::render('Students/Edit', [
-            'student' => $student
+        // Reuse Create page as functionality is
+        // basically the same when both creating and editing
+        return Inertia::render('Students/Create', [
+            'id' => $student->id,
+            'firstName' => $student->first_name,
+            'lastName' => $student->last_name,
+            'address' => $student->address,
         ]);
     }
 
