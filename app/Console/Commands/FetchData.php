@@ -110,7 +110,7 @@ class FetchData extends Command
         // using a debug option
         if ($this->option('debug')) {
             $this->warn('Could not fetch data from API; using dummy data...');
-            return json_decode(self::DUMMY_RESPONSE);
+            return json_decode(self::DUMMY_RESPONSE, true);
         }
 
         return null;
