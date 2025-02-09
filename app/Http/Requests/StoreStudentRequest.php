@@ -16,7 +16,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreStudentRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * We always authorize access to student entity
      */
     public function authorize(): bool
     {
@@ -38,7 +38,7 @@ class StoreStudentRequest extends FormRequest
     }
 
     /**
-     * Customize the error messages if needed.
+     * Get custom messages for validator errors.
      *
      * @return array<string, string>
      */
