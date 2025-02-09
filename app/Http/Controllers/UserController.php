@@ -14,12 +14,6 @@ use Inertia\Response;
 
 class UserController extends Controller
 {
-    /**
-     * Handle POST request with new user data
-     *
-     * @param SignupRequest $request
-     * @return RedirectResponse On success, redirects to /signin
-     */
     public function registerUser(SignupRequest $request): RedirectResponse
     {
         // Do we have pfp?
@@ -44,12 +38,6 @@ class UserController extends Controller
         return redirect()->intended('signin');
     }
 
-    /**
-     * Ensures user credentials are valid on login
-     *
-     * @param Request $request
-     * @return RedirectResponse Redirects to /dashboard on success
-     */
     public function authUser(Request $request): RedirectResponse
     {
         $creds = $request->validate([
@@ -68,11 +56,6 @@ class UserController extends Controller
         ])->onlyInput('email');
     }
 
-    /**
-     * Process GET request to /dashboard
-     *
-     * @return Response
-     */
     public function visitDashboard(): Response
     {
         // As user data won't change,
@@ -84,12 +67,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Terminates user session
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
     public function logout(Request $request): JsonResponse
     {
         Auth::logout();

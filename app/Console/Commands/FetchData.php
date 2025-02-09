@@ -10,10 +10,7 @@ use Throwable;
 
 class FetchData extends Command
 {
-    /**
-     * Endpoint to fetch data from
-     */
-    const API_ENDPOINT = "http://dummy.restapiexample.com/api/v1/employees";
+    const string API_ENDPOINT = "http://dummy.restapiexample.com/api/v1/employees";
 
     /**
      * API endpoint dummy response,
