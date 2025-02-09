@@ -1,6 +1,6 @@
 <script setup>
-import {Link, useForm} from '@inertiajs/vue3';
-import { defineProps } from 'vue';
+import { useForm } from '@inertiajs/vue3';
+
 
 const props = defineProps({
     id: Number,

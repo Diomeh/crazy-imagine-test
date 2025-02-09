@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
 import axios from "axios";
 
 const props = defineProps({

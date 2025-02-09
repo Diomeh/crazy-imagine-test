@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
 import { Link, useForm } from '@inertiajs/vue3';
 
 const deleteForm = useForm({
