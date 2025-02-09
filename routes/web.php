@@ -5,7 +5,9 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::redirect('/', '/signin');
+Route::get('/', function() {
+    return Inertia::render('Index');
+});
 
 // Signup routes
 Route::get('/signup', function() {
