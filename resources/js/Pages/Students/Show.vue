@@ -1,5 +1,8 @@
 <script setup>
-import { Link, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
+import SimpleButton from "../../Components/SimpleButton.vue";
+import SimpleTextArea from "../../Components/SimpleTextArea.vue";
+import SimpleInput from "../../Components/SimpleInput.vue";
 
 const props = defineProps({
     id: Number,
@@ -34,57 +37,14 @@ const deleteStudent = () => {
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-xl font-bold">Student #{{ id }}</h1>
             <div class="flex space-x-3">
-                <Link
-                    v-if="id"
-                    :href="`/students/${id}/edit`"
-                    class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors"
-                >
-                    Edit
-                </Link>
-
-                <button
-                    v-if="props.id"
-                    @click="deleteStudent"
-                    class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors">
-                    Delete
-                </button>
-
-                <button
-                    @click="goBack"
-                    class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">
-                    Go Back
-                </button>
+                <SimpleButton v-if="id" :href="`/students/${id}/edit`" text="Edit" color="success" type="link"/>
+                <SimpleButton v-if="id" @click="deleteStudent" text="Delete" color="danger"/>
+                <SimpleButton @click="goBack" text="Go Back" color="muted"/>
             </div>
         </div>
 
-        <div class="mb-3">
-            <label class="block">First Name</label>
-            <input
-                :value="firstName"
-                type="text"
-                class="w-full p-2 border rounded disabled"
-                disabled
-            />
-        </div>
-
-        <div class="mb-3">
-            <label class="block">Last Name</label>
-            <input
-                :value="lastName"
-                type="text"
-                class="w-full p-2 border rounded disabled"
-                disabled
-            />
-        </div>
-
-        <div class="mb-3">
-            <label class="block">Address</label>
-            <input
-                :value="address"
-                type="text"
-                class="w-full p-2 border rounded disabled"
-                disabled
-            />
-        </div>
+        <SimpleInput :value="firstName" label="First Name" />
+        <SimpleInput :value="lastName" label="Last Name" />
+        <SimpleTextArea :value="address" label="Address" />
     </div>
 </template>
