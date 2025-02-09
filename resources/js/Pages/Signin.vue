@@ -1,5 +1,7 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
+import SimpleButton from "../Components/SimpleButton.vue";
+import SimpleInput from "../Components/SimpleInput.vue";
 
 const form = useForm({
     email: "",
@@ -18,19 +20,10 @@ const submitForm = () => {
         <h2 class="text-xl font-bold mb-4">User Sign In</h2>
 
         <form @submit.prevent="submitForm">
-            <div class="mb-3">
-                <label class="block">Email:</label>
-                <input type="email" v-model="form.email" class="w-full p-2 border rounded"/>
-                <small v-if="form.errors.email" class="text-red-500">{{ form.errors.email }}</small>
-            </div>
+            <SimpleInput :form-binding="form" form-key="email" label="Email" type="email"/>
+            <SimpleInput :form-binding="form" form-key="password" label="Email" type="password"/>
 
-            <div class="mb-3">
-                <label class="block">Password:</label>
-                <input type="password" v-model="form.password" class="w-full p-2 border rounded"/>
-                <small v-if="form.errors.password" class="text-red-500">{{ form.errors.password }}</small>
-            </div>
-
-            <button type="submit" class="w-full p-2 bg-blue-500 text-white rounded">Sign In</button>
+            <SimpleButton text="Sign In" type="submit" class="w-full"/>
         </form>
 
         <div class="mt-4 text-center">
