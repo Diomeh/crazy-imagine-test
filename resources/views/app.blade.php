@@ -15,7 +15,14 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
-        @inertia
+        <div>
+            <div class="container mx-auto px-4 pt-4 font-bold">
+                <h1>
+                    <a href="/" class="text-blue-500 hover:underline">Main Page</a>
+                </h1>
+            </div>
+            <div class="my-4 border-t border-gray-300"></div>
+            @inertia
+        </div>
     </body>
 </html>
-

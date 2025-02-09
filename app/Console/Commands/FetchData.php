@@ -10,7 +10,10 @@ use Throwable;
 
 class FetchData extends Command
 {
-    const string API_ENDPOINT = "http://dummy.restapiexample.com/api/v1/employees";
+    /**
+     * Endpoint to fetch data from
+     */
+    const API_ENDPOINT = "http://dummy.restapiexample.com/api/v1/employees";
 
     /**
      * API endpoint dummy response,
@@ -18,7 +21,7 @@ class FetchData extends Command
      * Taken from an actual successful response to endpoint
      * 'id' field has been removed
      */
-    const string DUMMY_RESPONSE = '{
+    const DUMMY_RESPONSE = '{
         "status": "success",
         "data": [
             {

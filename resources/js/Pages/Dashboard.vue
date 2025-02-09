@@ -1,6 +1,6 @@
 <script setup>
-import { defineProps } from 'vue';
 import axios from "axios";
+import SimpleButton from "../Components/SimpleButton.vue";
 
 const props = defineProps({
     role: String,
@@ -49,10 +49,9 @@ const handleLogout = async () => {
         </div>
 
         <div class="flex-1 p-6">
-            <!-- Header -->
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold text-gray-800">Welcome {{ props.name }}!</h1>
-                <button class="bg-blue-500 text-white p-2 rounded">Profile</button>
+                <SimpleButton text="Profile"/>
             </div>
 
             <!-- Content Based on Role -->
@@ -64,19 +63,19 @@ const handleLogout = async () => {
                     <div class="bg-white p-6 shadow-lg rounded-lg">
                         <h3 class="text-lg font-semibold mb-4">Manage Users</h3>
                         <p>View and manage all registered users in the system.</p>
-                        <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Go to Users</button>
+                        <SimpleButton text="Manage Users"/>
                     </div>
 
                     <div class="bg-white p-6 shadow-lg rounded-lg">
                         <h3 class="text-lg font-semibold mb-4">Reports</h3>
                         <p>Access system-wide reports and analytics.</p>
-                        <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">View Reports</button>
+                        <SimpleButton text="View Reports"/>
                     </div>
 
                     <div class="bg-white p-6 shadow-lg rounded-lg">
                         <h3 class="text-lg font-semibold mb-4">System Settings</h3>
                         <p>Manage global settings and configurations.</p>
-                        <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Configure Settings</button>
+                        <SimpleButton text="Configure Settings"/>
                     </div>
                 </div>
             </div>
@@ -89,13 +88,13 @@ const handleLogout = async () => {
                     <div class="bg-white p-6 shadow-lg rounded-lg">
                         <h3 class="text-lg font-semibold mb-4">Assigned Tasks</h3>
                         <p>View your team's assigned tasks and manage them.</p>
-                        <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">View Tasks</button>
+                        <SimpleButton text="View Tasks"/>
                     </div>
 
                     <div class="bg-white p-6 shadow-lg rounded-lg">
                         <h3 class="text-lg font-semibold mb-4">Team Performance</h3>
                         <p>Monitor your team's performance and progress.</p>
-                        <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">View Performance</button>
+                        <SimpleButton text="View Performance"/>
                     </div>
                 </div>
             </div>

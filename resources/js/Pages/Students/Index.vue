@@ -1,6 +1,6 @@
 <script setup>
-import { defineProps } from 'vue';
-import { Link, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
+import SimpleButton from "../../Components/SimpleButton.vue";
 
 const deleteForm = useForm({
     id: 0,
@@ -28,13 +28,13 @@ const deleteStudent = (id) => {
 
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-xl font-bold">Student List</h1>
-            <Link
+
+            <SimpleButton
+                text="New student"
+                type="link"
                 href="/students/create"
-                class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
                 as="button"
-            >
-                Create New Student
-            </Link>
+            />
         </div>
 
         <!-- Table to display students -->
@@ -55,24 +55,26 @@ const deleteStudent = (id) => {
                 <td class="border-b px-4 py-2">{{ student.last_name }}</td>
                 <td class="border-b px-4 py-2">{{ student.address }}</td>
                 <td class="border-b px-4 py-2 text-center">
-                    <Link
+                    <SimpleButton
                         :href="`/students/${student.id}`"
-                        class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors mr-2"
-                    >
-                        View
-                    </Link>
-                    <Link
+                        text="View"
+                        type="link"
+                        color="success"
+                        class="mr-2"
+                    />
+                    <SimpleButton
                         :href="`/students/${student.id}/edit`"
-                        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors mr-2"
-                    >
-                        Edit
-                    </Link>
-                    <button
+                        text="Edit"
+                        type="link"
+                        color="primary"
+                        class="mr-2"
+                    />
+                    <SimpleButton
                         @click="() => { deleteStudent(student.id) }"
-                        class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition-colors mr-2"
-                    >
-                        Delete
-                    </button>
+                        :href="`/students/${student.id}`"
+                        text="Delete"
+                        color="danger"
+                    />
                 </td>
             </tr>
             </tbody>
@@ -81,36 +83,36 @@ const deleteStudent = (id) => {
         <!-- Pagination controls -->
         <div class="flex justify-center mt-4">
             <span>
-                <Link
+                <SimpleButton
                     v-if="paginator.prev_page_url"
                     :href="paginator.prev_page_url"
-                    class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 transition-colors mr-2"
-                >
-                    &laquo; Previous
-                </Link>
+                    text="&laquo; Previous"
+                    type="link"
+                    color="muted-light"
+                    class="mr-2"
+                />
             </span>
 
             <span v-for="(page, index) in paginator.links" :key="index">
-                <Link
+                <SimpleButton
                     v-if="page.url && index > 0 && index < (paginator.links.length - 1)"
                     :href="page.url"
-                    :class="[
-                        'py-2 px-4 rounded transition-colors mr-2',
-                        page.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black hover:bg-blue-500 hover:text-white'
-                    ]"
-                >
-                    {{ page.label }}
-                </Link>
+                    :text="page.label"
+                    :color="page.active ? 'primary' : 'primary-light'"
+                    class="mx-1"
+                    type="link"
+                />
             </span>
 
             <span>
-                <Link
+                <SimpleButton
                     v-if="paginator.next_page_url"
                     :href="paginator.next_page_url"
-                    class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 transition-colors ml-2"
-                >
-                    Next &raquo;
-                </Link>
+                    text="Next &raquo;"
+                    type="link"
+                    color="muted-light"
+                    class="ml-2"
+                />
             </span>
         </div>
     </div>
