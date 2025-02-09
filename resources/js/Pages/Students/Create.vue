@@ -1,6 +1,9 @@
 <script setup>
-import {Link, useForm} from '@inertiajs/vue3';
-import { defineProps } from 'vue';
+import { useForm } from '@inertiajs/vue3';
+
+import SimpleButton from "../../Components/SimpleButton.vue";
+import SimpleInput from "../../Components/SimpleInput.vue";
+import SimpleTextArea from "../../Components/SimpleTextArea.vue";
 
 const props = defineProps({
     id: Number,
@@ -43,59 +46,21 @@ const deleteStudent = () => {
                 <span v-else>Create New Student</span>
             </h1>
             <div class="flex space-x-2">
-                <button
-                    v-if="id"
-                    @click="deleteStudent"
-                    class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors">
-                    Delete
-                </button>
-
-                <button
-                    @click="goBack"
-                    class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors">
-                    Go Back
-                </button>
+                <SimpleButton v-if="id" @click="deleteStudent" text="Delete" color="danger" />
+                <SimpleButton @click="goBack" text="Go Back" color="muted"/>
             </div>
         </div>
 
-        <!-- Form to create or edit student -->
         <form @submit.prevent="submitForm" class="space-y-4">
             <input v-model="form.id" type="hidden" name="id">
-
-            <div class="mb-3">
-                <label class="block">First Name</label>
-                <input
-                    type="text"
-                    v-model="form.first_name"
-                    class="w-full p-2 border rounded"
-                    placeholder="Enter first name"
-                />
-                <small v-if="form.errors.first_name" class="text-red-500">{{ form.errors.first_name }}</small>
-            </div>
-
-            <div class="mb-3">
-                <label class="block">Last Name</label>
-                <input
-                    type="text"
-                    v-model="form.last_name"
-                    class="w-full p-2 border rounded"
-                    placeholder="Enter last name"
-                />
-                <small v-if="form.errors.last_name" class="text-red-500">{{ form.errors.last_name }}</small>
-            </div>
-
-            <div class="mb-3">
-                <label class="block">Address:</label>
-                <textarea v-model="form.address" class="w-full p-2 border rounded"></textarea>
-                <small v-if="form.errors.address" class="text-red-500">{{ form.errors.address }}</small>
-            </div>
+            <SimpleInput :form-binding="form" form-key="first_name" label="First Name" placeholder="Enter first name"/>
+            <SimpleInput :form-binding="form" form-key="last_name" label="Last Name" placeholder="Enter last name"/>
+            <SimpleTextArea :form-binding="form" form-key="address" label="Address"></SimpleTextArea>
 
             <div class="mt-4">
-                <button type="submit" class="w-full p-2 bg-blue-500 text-white rounded">
-                    <span v-if="id">Edit student</span>
-                    <span v-else>Create Student</span>
-                </button>
+                <SimpleButton :text="(id ? 'Edit' : 'Create') + ' student'" type="submit" color="primary"/>
             </div>
         </form>
     </div>
 </template>
+W
