@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,3 +22,5 @@ Route::post('/signin', [UserController::class, 'authUser']);
 Route::get('/dashboard', [UserController::class, 'visitDashboard']);
 
 Route::post('/logout', [UserController::class, 'logout']);
+
+Route::resource('students', StudentController::class);
